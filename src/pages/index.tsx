@@ -3,9 +3,10 @@ import AuthWrapper from "./AuthWrapper";
 import CartPage from "./CartPage";
 import CheckoutPage from "./CheckoutPage";
 import ErrorPage from "./ErrorPage";
+import HomePage from "./HomePage";
 import PrivateRoute from "./PrivateRoute";
 import ProductsPage from "./ProductsPage";
 import SingleProduct from "./SingleProduct";
 
 
-export {AboutPage, AuthWrapper, CartPage, CheckoutPage, ErrorPage, PrivateRoute, ProductsPage, SingleProduct}
+export {HomePage, AboutPage, AuthWrapper, CartPage, CheckoutPage, ErrorPage, PrivateRoute, ProductsPage, SingleProduct}
