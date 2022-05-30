@@ -1,3 +1,5 @@
+import { InitialState, Action } from '../../utils/types'
+
 import {
   ADD_TO_CART,
   CLEAR_CART,
@@ -6,7 +8,8 @@ import {
   TOGGLE_CART_ITEM_AMOUNT,
 } from '../actions'
 
-const cart_reducer = (state: any, action: { type: any }) => {
+
+const cart_reducer = (state: InitialState, action: Action) => {
   return state
   throw new Error(`No Matching "${action.type}" - action type`)
 }

@@ -11,6 +11,8 @@ import {
   CLEAR_FILTERS,
 } from './actions'
 
+import { useProductsContext } from './products_context'
+
 type CartProviderProps = {
     children: React.ReactNode
 }
@@ -23,6 +25,6 @@ export const FilterProvider = ({children}: CartProviderProps) => {
         <FilterContext.Provider value="cart_context">{children}</FilterContext.Provider>
     )
 }   
-export const useCartContext = () => {
+export const useFilterContext = () => {
   return useContext(FilterContext)
 }
