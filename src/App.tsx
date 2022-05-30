@@ -16,6 +16,7 @@ function App() {
         <Route path="/products/:id" element = { <SingleProduct />} />
          <Route path="*" element = { <ErrorPage />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }
