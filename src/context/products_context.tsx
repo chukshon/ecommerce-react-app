@@ -2,6 +2,9 @@ import axios from 'axios'
 import React, { useContext, useEffect, useReducer } from 'react'
 import reducer from './reducers/products_reducer'
 import { products_url as url } from '../utils/constants'
+
+import { InitialState } from '../types/products'
+
 import {
   SIDEBAR_OPEN,
   SIDEBAR_CLOSE,
@@ -13,17 +16,40 @@ import {
   GET_SINGLE_PRODUCT_ERROR,
 } from './actions'
 
-const initialState = {}
-
-type CartProviderProps = {
-    children: React.ReactNode
+const initialState: InitialState= {
+  isSidebarOpen: false,
+  products_loading: false,
+  products_error: false,
+  products: [],
+  featured_products: [],
+  single_product_loading: false,
+  single_product_error: false,
+  single_product: {}
 }
 
-const ProductContext = React.createContext("Default");
+type CartProviderProps = {
+  children: React.ReactNode
+}
+
+const ProductContext = React.createContext({})
 
 export const ProductsProvider = ({ children }: CartProviderProps) => {
+
+   const [state, dispatch] = useReducer(reducer, initialState);
+
+   const fetchProducts = async(url: string) =>{
+    dispatch({type: GET_PRODUCTS_BEGIN})
+    try{
+       const response = await axios.get(url)
+      const products = response.data
+      dispatch({type: GET_PRODUCTS_SUCCESS, payload: products})
+    }
+    catch(err){
+      dispatch({type: GET_PRODUCTS_ERROR})
+    }
+   }    
   return (
-    <ProductContext.Provider value='products context'>
+    <ProductContext.Provider value={{...state, fetchProducts}}>
       {children}
     </ProductContext.Provider>
   )
@@ -32,4 +58,3 @@ export const ProductsProvider = ({ children }: CartProviderProps) => {
 export const useProductsContext = () => {
   return useContext(ProductContext)
 }
-
