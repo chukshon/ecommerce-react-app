@@ -40,7 +40,7 @@ export const ProductsProvider = ({ children }: CartProviderProps) => {
    const fetchProducts = async(url: string) =>{
     dispatch({type: GET_PRODUCTS_BEGIN})
     try{
-       const response = await axios.get(url)
+      const response = await axios.get(url)
       const products = response.data
       dispatch({type: GET_PRODUCTS_SUCCESS, payload: products})
     }
