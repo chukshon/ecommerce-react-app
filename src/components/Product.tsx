@@ -4,9 +4,6 @@ import { formatPrice } from '../utils/helpers'
 import { FaSearch } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import {ProductsType} from '../types/products'
-
-
-
 const Product = ({ image, name, price, id }: ProductsType)  => {
   return (
     <Wrapper>

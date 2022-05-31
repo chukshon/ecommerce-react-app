@@ -1,5 +1,6 @@
 import React from 'react'
 import { GiCompass, GiDiamondHard, GiStabbedNote } from 'react-icons/gi'
+import {SingleServiceType} from '../types/services'
 export const links = [
   {
     id: 1,
@@ -18,7 +19,7 @@ export const links = [
   },
 ]
 
-export const services = [
+export const services:SingleServiceType[]  = [
   {
     id: 1,
     icon: <GiCompass />,
