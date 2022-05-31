@@ -11,9 +11,10 @@ export type ProductsType = {
   reviews: string
   id: string
   company: string
-  images: string
+  image: string
   featured: boolean
 }
+
 
 export type SingleProductImageType = {
   id: string
