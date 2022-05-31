@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 const Contact = () => {
   return (
+    
      <Wrapper>
       <div className='section-center'>
         <h3>Join our newsletter and get 20% off</h3>
