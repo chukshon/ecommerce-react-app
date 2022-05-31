@@ -10,16 +10,16 @@ import {
 } from '../actions'
 
 import { Action } from '../../utils/types'
-import { Products } from '../../types/products'
+import { ProductsType } from '../../types/products'
 
-import { InitialState } from '../../types/products'
-const products_reducer = (state: InitialState, action: any) => {
+import { InitialStateType } from '../../types/products'
+const products_reducer = (state: InitialStateType, action: any) => {
   if (action.type === GET_PRODUCTS_BEGIN) {
     return { ...state, products_loading: true }
   }
   if (action.type === GET_PRODUCTS_SUCCESS) {
     const featuredProducts = action.payload.filter(
-      (product: Products) => product.featured === true
+      (product: ProductsType) => product.featured === true
     )
     return {
       ...state,

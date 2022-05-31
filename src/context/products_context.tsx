@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useReducer } from 'react'
 import reducer from './reducers/products_reducer'
 import { products_url as url } from '../utils/constants'
 
-import { InitialState } from '../types/products'
+import { InitialStateType } from '../types/products'
 
 import {
   SIDEBAR_OPEN,
@@ -16,7 +16,9 @@ import {
   GET_SINGLE_PRODUCT_ERROR,
 } from './actions'
 
-const initialState: InitialState= {
+
+
+const initialState: InitialStateType= {
   isSidebarOpen: false,
   products_loading: false,
   products_error: false,
@@ -31,7 +33,7 @@ type CartProviderProps = {
   children: React.ReactNode
 }
 
-const ProductContext = React.createContext({})
+const ProductContext = React.createContext<any>({})
 
 export const ProductsProvider = ({ children }: CartProviderProps) => {
 
@@ -48,8 +50,12 @@ export const ProductsProvider = ({ children }: CartProviderProps) => {
       dispatch({type: GET_PRODUCTS_ERROR})
     }
    }    
+
+   useEffect(() => {
+     fetchProducts(url)
+   }, [])
   return (
-    <ProductContext.Provider value={{...state, fetchProducts}}>
+    <ProductContext.Provider value={{...state}}>
       {children}
     </ProductContext.Provider>
   )

@@ -1,4 +1,8 @@
-export type Products = {
+export type ProductContextType = {
+  state: InitialStateType
+}
+
+export type ProductsType = {
   name: string
   price: number
   description: string
@@ -11,7 +15,7 @@ export type Products = {
   featured: boolean
 }
 
-export type SingleProductImage = {
+export type SingleProductImageType = {
   id: string
   width: number
   height: number
@@ -22,7 +26,7 @@ export type SingleProductImage = {
   thumbnails: {}
 }
 
-export type SingleProduct = {
+export type SingleProductType = {
   name: string
   price: number
   description: string
@@ -34,16 +38,16 @@ export type SingleProduct = {
   shipping: boolean
   colors: string[]
   category: string
-  images: SingleProductImage[]
+  images: SingleProductImageType[]
 }
 
-export type InitialState = {
+export type InitialStateType = {
   isSidebarOpen: boolean
   products_loading: boolean
   products_error: boolean
-  products: Products[] | []
-  featured_products: Products[] | []
+  products: ProductsType[] | []
+  featured_products: ProductsType[] | []
   single_product_loading: boolean
   single_product_error: boolean
-  single_product: SingleProduct | {}
+  single_product: SingleProductType | {}
 }
