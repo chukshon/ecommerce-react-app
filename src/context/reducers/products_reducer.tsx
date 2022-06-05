@@ -13,7 +13,14 @@ import { Action } from '../../utils/types'
 import { ProductsType } from '../../types/products'
 
 import { InitialStateType } from '../../types/products'
-const products_reducer = (state: InitialStateType, action: any) => {
+const products_reducer = (state: InitialStateType, action: Action) => {
+
+  if(action.type === SIDEBAR_OPEN ){
+    return {...state, isSidebarOpen: true}
+  }
+  if(action.type === SIDEBAR_CLOSE ){
+    return {...state, isSidebarOpen: false}
+  }
   if (action.type === GET_PRODUCTS_BEGIN) {
     return { ...state, products_loading: true }
   }

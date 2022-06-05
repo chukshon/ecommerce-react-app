@@ -1,12 +1,23 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import {SingleProductType} from '../types/products'
 
 interface PageHeroProps {
-  title: string
+  title: string,
+  product: boolean | SingleProductType
 }
-const PageHero = ({title}: PageHeroProps) => {
-  return <h4>page hero</h4>
+const PageHero = ({title, product}: PageHeroProps) => {
+  return (
+    <Wrapper>
+      <div className='section-center'>
+        <h3>
+          <Link to='/'>Home</Link>
+          {!product && <Link to='/products'>/ Products</Link>}/ {title}
+        </h3>
+      </div>
+    </Wrapper>
+  )
 }
 
 const Wrapper = styled.section`

@@ -4,6 +4,6 @@ export type InitialState = {
 
 
 export type Action = {
-    type: any,
-    payload: any
+    type: string,
+    payload?: unknown | any 
 }

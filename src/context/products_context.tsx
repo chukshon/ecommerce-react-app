@@ -16,8 +16,6 @@ import {
   GET_SINGLE_PRODUCT_ERROR,
 } from './actions'
 
-
-
 const initialState: InitialStateType= {
   isSidebarOpen: false,
   products_loading: false,
@@ -51,11 +49,19 @@ export const ProductsProvider = ({ children }: CartProviderProps) => {
     }
    }    
 
+   const openSideBar = () => {
+     dispatch({type: SIDEBAR_OPEN})
+   }
+
+   const closeSideBar = () => {
+     dispatch({type: SIDEBAR_CLOSE})
+   }
+
    useEffect(() => {
      fetchProducts(url)
    }, [])
   return (
-    <ProductContext.Provider value={{...state}}>
+    <ProductContext.Provider value={{...state, openSideBar, closeSideBar} }>
       {children}
     </ProductContext.Provider>
   )

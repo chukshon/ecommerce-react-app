@@ -8,6 +8,7 @@ function App() {
   return (
     <Router>
       <Navbar />
+      <Sidebar />
       <Routes>
         <Route path="/" element = { <HomePage />} />
         <Route path="/about" element = { <AboutPage />} />
