@@ -10,7 +10,6 @@ import {ProductsType} from '../types/products'
 const FeaturedProducts = () => {
 
   const {featured_products, products_loading, products_error} = useProductsContext()
-
   if(products_loading){
     return <Loading />
   }

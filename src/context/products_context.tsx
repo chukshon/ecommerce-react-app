@@ -31,7 +31,7 @@ type CartProviderProps = {
   children: React.ReactNode
 }
 
-const ProductContext = React.createContext<any>({})
+const ProductContext = React.createContext<any>(initialState)
 
 export const ProductsProvider = ({ children }: CartProviderProps) => {
 

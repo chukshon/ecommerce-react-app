@@ -8,9 +8,17 @@ import {
   FILTER_PRODUCTS,
   CLEAR_FILTERS,
 } from '../actions'
+import { Action } from '../../utils/types'
 
-const filter_reducer = (state: any, action: { type: any }) => {
-  return state
+import {filterInitialStateType} from '../../types/filter'
+
+const filter_reducer = (state: filterInitialStateType, action: Action) => {
+
+  if(action.type === LOAD_PRODUCTS){
+    return(
+      {...state, filteredProducts: action.payload, allProducts: action.payload}
+    )
+  }
   throw new Error(`No Matching "${action.type}" - action type`)
 }
 

@@ -1,11 +1,22 @@
 import React from 'react'
 import styled from 'styled-components'
 import Product from './Product'
+import { ProductsType } from '../types/products'
 
-const GridView = () => {
-  return <h4>Grid View</h4>
+interface iProduct {
+  filteredProducts: []
 }
-
+const GridView = ({filteredProducts}: iProduct) => {
+  return (
+    <Wrapper>
+      <div className='products-container'>
+        {filteredProducts.map((product:ProductsType ) => {
+          return <Product key={product.id} {...product} />
+        })}
+      </div>
+    </Wrapper>
+  )
+}
 const Wrapper = styled.section`
   img {
     height: 175px;
