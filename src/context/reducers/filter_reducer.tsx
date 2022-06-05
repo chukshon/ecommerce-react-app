@@ -16,7 +16,8 @@ import { ProductsType } from '../../types/products'
 type ACTIONTYPE =
   | { type: typeof LOAD_PRODUCTS; payload:ProductsType[]}
   | { type: typeof SET_GRIDVIEW; }
-  | { type: typeof SET_LISTVIEW; };
+  | { type: typeof SET_LISTVIEW; }
+  | { type: typeof UPDATE_SORT; payload: string};
 
 
   
@@ -35,6 +36,12 @@ const filter_reducer = (state: filterInitialStateType, action: ACTIONTYPE) => {
   if(action.type === SET_GRIDVIEW){
     return({
       ...state, grid_view: true
+    })
+  }
+
+ if(action.type === UPDATE_SORT){
+    return({
+      ...state, sort: action.payload
     })
   }
 

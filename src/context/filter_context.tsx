@@ -43,8 +43,13 @@ export const FilterProvider = ({children}: CartProviderProps) => {
     const setListView = () => {
       dispatch({type: SET_LISTVIEW})
     }
+
+    const updateSort = (e: React.FormEvent<HTMLInputElement>) => {
+      const target = e.target as HTMLInputElement
+      dispatch({type: UPDATE_SORT, payload: target.value})
+    }
     return (
-        <FilterContext.Provider value={{...state, setGridView, setListView}}>{children}</FilterContext.Provider>
+        <FilterContext.Provider value={{...state, setGridView, setListView, updateSort}}>{children}</FilterContext.Provider>
     )
   
 }   
