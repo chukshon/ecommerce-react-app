@@ -28,13 +28,17 @@ const initialState: filterInitialStateType = {
 const FilterContext = React.createContext<any>({});
 
 export const FilterProvider = ({children}: CartProviderProps) => {
+      const [state, dispatch] = useReducer(reducer, initialState)
 
     const {products} = useProductsContext()
     useEffect(() => {
       dispatch({type: LOAD_PRODUCTS, payload: products})
     }, [products])
+    useEffect(() => {
+       dispatch({type: SORT_PRODUCTS})
+    },[products, state.sort])
 
-    const [state, dispatch] = useReducer(reducer, initialState)
+
 
     const setGridView = () => {
       dispatch({type: SET_GRIDVIEW})
@@ -43,7 +47,6 @@ export const FilterProvider = ({children}: CartProviderProps) => {
     const setListView = () => {
       dispatch({type: SET_LISTVIEW})
     }
-
     const updateSort = (e: React.FormEvent<HTMLInputElement>) => {
       const target = e.target as HTMLInputElement
       dispatch({type: UPDATE_SORT, payload: target.value})
