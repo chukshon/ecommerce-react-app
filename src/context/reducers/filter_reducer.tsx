@@ -11,15 +11,34 @@ import {
 import { Action } from '../../utils/types'
 
 import {filterInitialStateType} from '../../types/filter'
+import { ProductsType } from '../../types/products'
 
-const filter_reducer = (state: filterInitialStateType, action: Action) => {
+type ACTIONTYPE =
+  | { type: typeof LOAD_PRODUCTS; payload:ProductsType[]}
+  | { type: typeof SET_GRIDVIEW; }
+  | { type: typeof SET_LISTVIEW; };
+
+
+  
+const filter_reducer = (state: filterInitialStateType, action: ACTIONTYPE) => {
 
   if(action.type === LOAD_PRODUCTS){
     return(
       {...state, filteredProducts: action.payload, allProducts: action.payload}
     )
   }
-  throw new Error(`No Matching "${action.type}" - action type`)
+  if(action.type === SET_LISTVIEW){
+    return({
+      ...state, grid_view: false
+    })
+  }
+  if(action.type === SET_GRIDVIEW){
+    return({
+      ...state, grid_view: true
+    })
+  }
+
+  throw new Error(`No Matching "" - action type`)
 }
 
 export default filter_reducer

@@ -35,6 +35,8 @@ const products_reducer = (state: InitialStateType, action: Action) => {
       products: action.payload,
     }
   }
+
+  
   if (action.type === GET_PRODUCTS_ERROR) {
     return {
       ...state,
