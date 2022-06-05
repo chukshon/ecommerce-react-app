@@ -18,7 +18,7 @@ type ACTIONTYPE =
   | { type: typeof SET_GRIDVIEW; }
   | { type: typeof SET_LISTVIEW; }
   | { type: typeof UPDATE_SORT; payload: string}
- | { type: typeof SORT_PRODUCTS; }
+  | { type: typeof SORT_PRODUCTS; }
 
 
   
@@ -49,16 +49,11 @@ const filter_reducer = (state: filterInitialStateType, action: ACTIONTYPE) => {
       let tempProducts = filteredProducts
       if(sort === "price-lowest"){
         tempProducts = tempProducts.sort((a, b) => {
-        if (a.price < b.price) {
-          return -1
-        }
-        if (a.price > b.price) {
-          return 1
-        }
-        return 0
+
+       return a.price - b.price
       })
       }
-      if (sort === 'price-highest') {
+    if (sort === 'price-highest') {
       tempProducts = tempProducts.sort((a, b) => b.price - a.price)
     }
      if (sort === 'name-a') {

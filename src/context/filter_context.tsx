@@ -22,7 +22,13 @@ const initialState: filterInitialStateType = {
   filteredProducts: [],
   allProducts: [],
   grid_view: true,
-  sort: 'price-lowest'
+  sort: 'price-lowest',
+  filters: {
+     text: '',
+    company: 'all',
+    category: 'all',
+    color: 'all',
+  }
 }
 
 const FilterContext = React.createContext<any>({});
