@@ -12,7 +12,11 @@ export type ProductsType = {
   id: string
   company: string
   image: string
+  shipping: boolean
+  colors: string[]
   featured: boolean
+  category: string
+  images: SingleProductImageType[]
 }
 
 

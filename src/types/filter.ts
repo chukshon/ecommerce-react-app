@@ -1,4 +1,4 @@
-import { ProductsType } from './products'
+import { ProductsType, SingleProductType } from './products'
 
 
 export type filterContextType = {
@@ -14,5 +14,9 @@ export type filterInitialStateType = {
         company: string,
         category: string,
         color: string,
+        min_price: number,
+        max_price: number,
+        price: number,
+        shipping: boolean
     }
 }

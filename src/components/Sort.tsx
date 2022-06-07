@@ -5,6 +5,7 @@ import styled from 'styled-components'
 const Sort = () => {
   const {filteredProducts, grid_view, setGridView, setListView, updateSort, sort} = useFilterContext()
   return (
+    
     <Wrapper>
       <div className='btn-container'>
         <button

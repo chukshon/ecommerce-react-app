@@ -6,6 +6,7 @@ import { ProductsType } from '../types/products'
 interface iProduct {
   filteredProducts: []
 }
+
 const GridView = ({filteredProducts}: iProduct) => {
   return (
     <Wrapper>

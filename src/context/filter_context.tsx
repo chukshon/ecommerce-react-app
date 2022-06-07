@@ -14,6 +14,7 @@ import {
 } from './actions'
 
 import {filterInitialStateType} from '../types/filter'
+import {UserEvent} from '../types/event'
 
 type CartProviderProps = {
     children: React.ReactNode
@@ -24,27 +25,31 @@ const initialState: filterInitialStateType = {
   grid_view: true,
   sort: 'price-lowest',
   filters: {
-     text: '',
+    text: '',
     company: 'all',
     category: 'all',
     color: 'all',
+    min_price: 0,
+    max_price: 0,
+    price: 0,
+    shipping: false
   }
 }
 
 const FilterContext = React.createContext<any>({});
 
 export const FilterProvider = ({children}: CartProviderProps) => {
-      const [state, dispatch] = useReducer(reducer, initialState)
+    const [state, dispatch] = useReducer(reducer, initialState)
 
     const {products} = useProductsContext()
     useEffect(() => {
       dispatch({type: LOAD_PRODUCTS, payload: products})
     }, [products])
+   
     useEffect(() => {
        dispatch({type: SORT_PRODUCTS})
+        dispatch({type: FILTER_PRODUCTS})
     },[products, state.sort])
-
-
 
     const setGridView = () => {
       dispatch({type: SET_GRIDVIEW})
@@ -53,14 +58,34 @@ export const FilterProvider = ({children}: CartProviderProps) => {
     const setListView = () => {
       dispatch({type: SET_LISTVIEW})
     }
+
     const updateSort = (e: React.FormEvent<HTMLInputElement>) => {
       const target = e.target as HTMLInputElement
       dispatch({type: UPDATE_SORT, payload: target.value})
     }
+
+    const updateFilter = (e: React.FormEvent<HTMLInputElement>) => {
+      let target = e.target as HTMLInputElement
+      const name = target.name;
+      let value: any = target.value;
+      if(name === 'category'){
+        value = target.textContent
+      }
+      if(name === "color"){
+         value = target.dataset.color
+      }
+      if (name === 'price') {
+       value = Number(value)
+      }
+      if (name === 'shipping') {
+      value = target.checked
+      }
+    }
+    
+
     return (
         <FilterContext.Provider value={{...state, setGridView, setListView, updateSort}}>{children}</FilterContext.Provider>
     )
-  
 }   
 export const useFilterContext = () => {
   return useContext(FilterContext)
