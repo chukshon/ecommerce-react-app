@@ -14,7 +14,6 @@ import {
 } from './actions'
 
 import {filterInitialStateType} from '../types/filter'
-import {UserEvent} from '../types/event'
 
 type CartProviderProps = {
     children: React.ReactNode
@@ -41,15 +40,17 @@ const FilterContext = React.createContext<any>({});
 export const FilterProvider = ({children}: CartProviderProps) => {
     const [state, dispatch] = useReducer(reducer, initialState)
 
-    const {products} = useProductsContext()
+    const {products} = useProductsContext();
+
     useEffect(() => {
       dispatch({type: LOAD_PRODUCTS, payload: products})
     }, [products])
    
     useEffect(() => {
+       dispatch({type: FILTER_PRODUCTS})
        dispatch({type: SORT_PRODUCTS})
-        dispatch({type: FILTER_PRODUCTS})
-    },[products, state.sort])
+     
+    },[products, state.sort, state.filters])
 
     const setGridView = () => {
       dispatch({type: SET_GRIDVIEW})
@@ -80,11 +81,13 @@ export const FilterProvider = ({children}: CartProviderProps) => {
       if (name === 'shipping') {
       value = target.checked
       }
+      dispatch({ type: UPDATE_FILTERS, payload: { name, value } })
     }
-    
-
+    const clearFilters = () => {
+    dispatch({ type: CLEAR_FILTERS })
+  }
     return (
-        <FilterContext.Provider value={{...state, setGridView, setListView, updateSort}}>{children}</FilterContext.Provider>
+        <FilterContext.Provider value={{...state, setGridView, setListView, updateSort, updateFilter, clearFilters}}>{children}</FilterContext.Provider>
     )
 }   
 export const useFilterContext = () => {

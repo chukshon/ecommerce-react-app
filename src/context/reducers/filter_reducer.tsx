@@ -20,6 +20,8 @@ type ACTIONTYPE =
   | { type: typeof UPDATE_SORT; payload: string }
   | { type: typeof SORT_PRODUCTS }
   | {type: typeof FILTER_PRODUCTS}
+  | {type: typeof CLEAR_FILTERS}
+  | {type: typeof UPDATE_FILTERS; payload: {name: string, value: string}}
 
 const filter_reducer = (state: filterInitialStateType, action: ACTIONTYPE) => {
   if (action.type === LOAD_PRODUCTS) {
@@ -77,6 +79,11 @@ const filter_reducer = (state: filterInitialStateType, action: ACTIONTYPE) => {
     }
   }
 
+  if (action.type === UPDATE_FILTERS) {
+    const { name, value } = action.payload
+    return { ...state, filters: {...state.filters, [name]: value } }
+  }
+
   if(action.type === FILTER_PRODUCTS){
     const { allProducts } = state
     const { text, category, company, color, price, shipping } = state.filters
@@ -111,7 +118,21 @@ const filter_reducer = (state: filterInitialStateType, action: ACTIONTYPE) => {
     if (shipping) {
       tempProducts = tempProducts.filter((product) => product.shipping === true)
     }
-    return { ...state, filtered_products: tempProducts }
+    return { ...state, filteredProducts: tempProducts }
+  }
+    if (action.type === CLEAR_FILTERS) {
+    return {
+      ...state,
+      filters: {
+        ...state.filters,
+        text: '',
+        company: 'all',
+        category: 'all',
+        color: 'all',
+        price: state.filters.max_price,
+        shipping: false,
+      },
+    }
   }
 
   throw new Error(`No Matching "" - action type`)
